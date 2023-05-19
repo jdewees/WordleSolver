@@ -3,12 +3,13 @@ using System.Diagnostics;
 
 
 var sw = new Stopwatch();
+int len = 50;
 sw.Start();
+
 var f = new Finder();
-//Finder.SolveBruteForce();
-
-
-
-Finder.SolveRecursive();
+for (int i = 0; i < len; i++)
+{
+    Finder.SolveRecursive();
+}
 sw.Stop();
-Console.WriteLine("elapsed total time of {0} ms.", sw.ElapsedMilliseconds);
+Console.WriteLine("elapsed avg time of {0} ms.",(int) sw.ElapsedMilliseconds/len);

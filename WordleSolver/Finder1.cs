@@ -63,7 +63,13 @@ internal class Finder
 
 
     }
-
+    /// <summary>
+    /// iterate over a string building up an integer bitmap of letters within the string.
+    /// note that two words with the same letters (but diferent order) will produce the same outputs
+    /// e.g. rowed and ordew produce same output.
+    /// </summary>
+    /// <param name="str"></param>
+    /// <returns></returns>
     private static int letterbits(string str)
     {
         int n = 0;
@@ -287,11 +293,14 @@ internal class Finder
         }
 
         //build index on the least used letter
+        int bitmap = 0;
+        int letter = 0;
+        int min = 0;
         for (int i = 0; i < bitmaps_for_recursive_algo.Count(); i++)
         {
-            int bitmap = bitmaps_for_recursive_algo[i];
-            int letter = CountZeros(bitmap);
-            int min = reverseletterOrder[letter];
+            bitmap = bitmaps_for_recursive_algo[i];
+            letter = CountZeros(bitmap);
+            min = reverseletterOrder[letter];
 
             bitmap &= bitmap - 1;
             while (bitmap > 0)
@@ -336,7 +345,7 @@ internal class Finder
         for (int i = maxLetter; i < 26; i++)
         {
             int letter = letterOrder[i];
-            int m = 1 << letter;
+            int m = 1 << letter; // create a bitmask representing the letter
             if ((totalbits & m) != 0) // does the accumulated set of bits already have this letter?
             {
                 continue;
